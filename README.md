@@ -25,7 +25,7 @@ $ python3 main.py -h
 ```bash 
 $ python3 main.py -u enter_the_url
 ```
-* If the website admin panel is found there would be a new file named "admin_panels.txt" go open it and find the admin panel that the prohram has found
+* If the website admin panel is found there would be a new file named "admin_panels.txt" go open it and find the admin panel that the program has found
 ## Authors
 
 - [@Minuka](https://github.com/Dontharu)
