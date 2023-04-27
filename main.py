@@ -48,7 +48,8 @@ target = 'http://' + target
 try:
     re = requests.get(target + '/robots.txt')
     if '<html>' in re.text:
-        print ('  \033[1;31m[-]\033[1;m Robots.txt not found\n')
+        print ('\033[1;31m[-]\033[1;m Robots.txt not found\n')
+        breakpoint()
     else:
         print ('  \033[1;32m[+]\033[0m Robots.txt found\n')
         file = open("data.html", "w")
@@ -63,14 +64,16 @@ for each in admin_panel:
     try:
         requests.get(target+each)
     except:
-        print(f"{Cy}Could not find{cl}")
+        break
     else:
         r = requests.get(target+each)
         if r.status_code == 200:
-            if len(r.history) == 0:
-                print(f"{Gr}[+]",target+each,{cl})
-                break
-            else:
-                print(f"{Ye}[-] redirected{cl}")
+            print(f"{Gr}[+] Admin Panel: ",target+each,{cl})
+            file = open("admin_panels.txt", "w")
+            file.write(target+each)
+        elif r.status_code == 404:
+            print(f"{Re}[-]{cl}",target+each)
+        elif r.status_code == 302:
+            print(f"{Re}[-]{cl}",target+each)
         else:
             print(f"{Re}[-]{cl}",target+each)
