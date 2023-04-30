@@ -11,11 +11,25 @@
 Install Link-Admin with git
 
 ```bash
+$ sudo apt install git
 $ git clone https://github.com/Dontharu/Link-Admin
 $ cd Link-Admin
 $ pip install -r requirements.txt
 $ python3 main.py -h
 ```
+
+## Install in Kali Linux
+
+```bash
+$ sudo apt install php
+$ sudo apt install python3
+$ sudo apt install git
+$ git clone https://github.com/Dontharu/Link-Admin
+$ cd Link-Admin
+$ pip install -r requirements.txt
+$ python3 main.py -h
+```
+---
 
 # Important
 ## Need a good wifi connection to run it fast
@@ -28,6 +42,12 @@ $ python3 main.py -h
 $ python3 main.py -u enter_the_url
 ```
 * If the website admin panel is found there would be a new file named "admin_panels.txt" go open it and find the admin panel that the program has found
+
+---
+
+## Repository Views
+[![](https://visitcount.itsvg.in/api?id=Dontharu&label=Profile%20Views&color=0&icon=0&pretty=true)](https://visitcount.itsvg.in)
+
 
 ## Authors
 
