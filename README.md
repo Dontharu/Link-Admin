@@ -1,6 +1,8 @@
 # Link-Admin
 
-* A Tool That You Could Find Admin Panel Of Any Website
+* A Tool That You Could Find Admin Panel Of Any Website.
+* Most Importantly There Are Over 30,000 Paths To Find The Admin Panel.
+* Remember This Tool Cannot Find High Label Security Website Admin Panels(sometimes finds)
 
 ![python](https://img.shields.io/badge/Python-v3.10-3776AB?style=for_the_badge&logo=Python)
 
