@@ -2,6 +2,9 @@ import requests
 import argparse
 import pyfiglet
 import os.path
+import os
+import time
+import subprocess
 from termcolor import colored
 
 # open
@@ -16,6 +19,11 @@ Wh='\033[1;37m'
 
 # close
 cl='\033[0m'
+
+os.system("python3 version/checkversion.py")
+time.sleep(1.5)
+subprocess.run("cls", shell=True)
+subprocess.run("clear", shell=True)
 
 # banner
 banner = pyfiglet.figlet_format("Link Admin")
