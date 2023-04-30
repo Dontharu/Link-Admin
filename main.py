@@ -1,6 +1,7 @@
 import requests
 import argparse
 import pyfiglet
+import os.path
 from termcolor import colored
 
 # open
@@ -21,15 +22,11 @@ banner = pyfiglet.figlet_format("Link Admin")
 text = colored(banner, "red")
 print(text)
 
-print(f'''{Re}DISCLAIMER!{cl}\n {Wh}This tool is only for educational purposes, I am not Responsible for any damage for a website
+print(f'''{Re}DISCLAIMER!{cl}\n {Wh}This tool is only for educational purposes\n I am not Responsible for any damage for a website
 {cl}\n''')
-
-# admin panels
-admin_panel = open("paths.txt", "r")
 
 # defines the parser
 parser = argparse.ArgumentParser() 
-
 # Arguements that can be supplied
 parser.add_argument("-u", help="target url", dest='target')
 args = parser.parse_args()
@@ -45,35 +42,118 @@ target = target.replace('http://', '')
 target = target.replace('/', '')
 target = 'http://' + target
 
+# admin panels
+try:
+    user = input(f"{Mage}Do you want to put your own paths?(y/default(n)):{cl} ")
+    if user == "n":
+        print("")
+        print(f"{Cy}[+]{cl} Default paths using")
+        default = open("paths.txt", "r")
+        pass
+
+    elif user == "y":
+        admin_panel = input("Enter file of paths path: ")
+        try:
+            admin = open(admin_panel, "r")
+            print("")
+            print(f"{Cy}[+]{cl} File is available for use")
+        except IOError:
+            print("")
+            print(f"{Ye}[-]{cl} File is not accessible. {Re}Wrong Path!{cl}") 
+            print("")
+            quit()
+
+    else:
+        print("Type Error: "+user)
+        print("")
+        print(f"{Blu}Exiting the program! Goodbye{cl}")
+        quit()
+        print("")
+
+except Exception as e:
+    print(e)
+    quit()
+
 try:
     re = requests.get(target + '/robots.txt')
     if '<html>' in re.text:
-        print ('\033[1;31m[-]\033[1;m Robots.txt not found\n')
+        print(f'{Re}[-]{cl} Robots.txt not found\n')
         breakpoint()
     else:
-        print ('  \033[1;32m[+]\033[0m Robots.txt found\n')
+        print("\n")
+        print(f'{Gr}[+]{cl} Robots.txt found')
+        print("")
         file = open("data.html", "w")
         file.write(re.text)
-        print("\033[1;32m[+]\033[0m Open the file 'data.html' to find what is written in it.\n")
+        print(f"{Gr}[+]{cl} Open the file 'data.html' to find what is written in it.\n")
 except:
-    print ('  \033[1;31m[-]\033[1;m Robots.txt not found\n')
+    print(f'{Re}[-]{cl} Robots.txt not found\n')
 
-for each in admin_panel:
-    if not each[0] == "/":
-        each = "/"+each
-    try:
-        requests.get(target+each)
-    except:
-        break
+
+def link():
+    if user == "n":
+        for each in default:
+            if not each[0] == "/":
+                each = "/"+each
+            try:
+                combine = target+each
+                requests.get(combine)
+            except:
+                break
+            else:
+                combine = target+each
+                r = requests.get(combine)
+                if r.status_code == 200:
+                    print(f"{Gr}[+] Admin Panel: {combine}{cl}")             
+                    file = open("admin_panels.txt", "a")
+                    file.write(combine)
+                elif r.status_code == 404:
+                    print(f"{Re}[-]{cl}",combine)
+                elif r.status_code == 302:
+                    print(f"{Re}[-]{cl}",combine)
+                else:
+                    print(f"{Re}[-]{cl}",combine)
+
+    elif user == "y":
+        for each in admin:
+            if not each[0] == "/":
+                each = "/"+each
+            try:
+                combine = target+each
+                requests.get(combine)
+            except:
+                break
+            else:
+                combine = target+each
+                r = requests.get(combine)
+                if r.status_code == 200:
+                    print(f"{Gr}[+] Admin Panel: {combine}{cl}")
+                    file = open("admin_panels.txt", "a")
+                    file.write("")
+                    file.write(combine)
+                elif r.status_code == 404:
+                    print(f"{Re}[-]{cl}",combine)
+                elif r.status_code == 302:
+                    print(f"{Re}[-]{cl}",combine)
+                else:
+                    print(f"{Re}[-]{cl}",combine)
+
     else:
-        r = requests.get(target+each)
-        if r.status_code == 200:
-            print(f"{Gr}[+] Admin Panel: ",target+each,{cl})
-            file = open("admin_panels.txt", "w")
-            file.write(target+each)
-        elif r.status_code == 404:
-            print(f"{Re}[-]{cl}",target+each)
-        elif r.status_code == 302:
-            print(f"{Re}[-]{cl}",target+each)
-        else:
-            print(f"{Re}[-]{cl}",target+each)
+        print(f"{Re}Wrong input!{cl}")
+
+if __name__ == "__main__":
+
+    link()
+    path = "admin_panels.txt"
+    check_file = os.path.exists(path)
+
+    if check_file == True:
+        with open(r"admin_panels.txt", 'r') as fp:
+            for count, line in enumerate(fp):
+               pass
+        total = count + 1
+        print(f"{Bl}[++]{cl} {Cy}{total}{cl} {Blu}Admin Panels Found . Go Check Out 'admin_panels.txt' To See The Admin Panels{cl}")
+
+    else:
+        print(f"{Ye}[--] Every SORRY We Couldn't Find And Admin Panel{cl}")
+        print("")
