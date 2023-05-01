@@ -26,11 +26,11 @@ else:
 row = []
 info = ''
 result = ''
-version = '1.4.3'
+version = '1.4.4'
 
 def ver_check():
 	print(G + '[+]' + C + ' Checking the Link-Admin for updates....', end='')
-	ver_url = 'https://raw.githubusercontent.com/Dontharu/Link-Admin/main/version/version.txt'
+	ver_url = 'https://raw.githubusercontent.com/Dontharu/Link-Admin/version/version.txt'
 	try:
 		ver_rqst = requests.get(ver_url)
 		ver_sc = ver_rqst.status_code
@@ -44,6 +44,10 @@ def ver_check():
 			else:
 				print(C + '[' + R + ' Available : {} '.format(github_ver) + C + ']' + '\n')
 				time.sleep(1.5)
+				os.system("bash reinstall.sh")
+				time.sleep(1.5)
+				subp.run("cls", shell=True)
+				subp.run("clear", shell=True)
 		else:
 			print(C + '[' + R + ' Status : {} '.format(ver_sc) + C + ']' + '\n')
 	except Exception as e:
