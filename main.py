@@ -20,6 +20,10 @@ Wh='\033[1;37m'
 # close
 cl='\033[0m'
 
+# check for updates
+os.system("bash version/severite.sh")
+time.sleep(2)
+
 os.system("python3 version/checkversion.py")
 time.sleep(1.5)
 subprocess.run("cls", shell=True)
