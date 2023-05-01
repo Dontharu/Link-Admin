@@ -44,7 +44,7 @@ def ver_check():
 			else:
 				print(C + '[' + R + ' Available : {} '.format(github_ver) + C + ']' + '\n')
 				time.sleep(1.5)
-				os.system("bash reinstall.sh")
+				os.system("bash version/reinstall.sh")
 				time.sleep(1.5)
 				subp.run("cls", shell=True)
 				subp.run("clear", shell=True)
